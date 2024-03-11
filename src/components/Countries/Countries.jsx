@@ -5,6 +5,7 @@ import './Countries.css'
 
 const Countries = () => {
     const [countries, setCountries] = useState([]);
+    const [visitedCountries, setVisitedCountries] = useState([]);
 
     useEffect(() =>{
         fetch('https://restcountries.com/v3.1/all')
@@ -12,14 +13,27 @@ const Countries = () => {
         .then(data => setCountries(data))
     },[])
 
+    const handleVisitedCountry = country =>{
+        console.log('Add this to your visited country');
+        const sum = setVisitedCountries + 1;
+        console.log(sum);
+        visitedCountries.push(country);
+    }
 
     return (
         <div>
             <h3>Countries: {countries.length}</h3>
+            <div>
+                <h4>Visited Countries: {visitedCountries.length}</h4>
+                <ul>
+                    j
+                </ul>
+            </div>
+
             <div className="country-container">
             {
             countries.map(country => 
-            <Country key={country.cca3} country={country}></Country>
+            <Country key={country.cca3} handleVisitedCountry={handleVisitedCountry} country={country}></Country>
             )};
             {/* {countries.map((country, index) => <Country key={index} country={country}></Country>)}; */}
             </div>
